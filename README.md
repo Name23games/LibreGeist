@@ -30,9 +30,9 @@ LibreGeist requires **YYToolkit v5**. Older YYToolkit versions may not work corr
 6. Start the game and check the Aurie console/logs to make sure LibreGeist loaded.
 
 ## Useful Guides (not by me)
-[Installing YYTK v5 + C# bindings](https://youtu.be/KQ6gzVobmOY?si=0RQ68rsf_DusI2-C)
-[Creating your first project](https://github.com/AurieFramework/AurieSharp/wiki/Creating-a-mod)
-[Setting up YYTK](https://github.com/AurieFramework/YYToolkit/wiki/Next:-Getting-Started#installing-yytoolkit-on-windows-using-aurie-manager)
+* [Installing YYTK v5 + C# bindings](https://youtu.be/KQ6gzVobmOY?si=0RQ68rsf_DusI2-C)
+* [Creating your first project](https://github.com/AurieFramework/AurieSharp/wiki/Creating-a-mod)
+* [Setting up YYTK](https://github.com/AurieFramework/YYToolkit/wiki/Next:-Getting-Started#installing-yytoolkit-on-windows-using-aurie-manager)
 
 # RoadMap
 * LibreGeistAPI documentation
