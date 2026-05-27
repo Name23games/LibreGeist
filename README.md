@@ -26,7 +26,7 @@ LibreGeist requires **YYToolkit v5**. Older YYToolkit versions may not work corr
 2. Install **YYToolkit v5**.
 3. Install **AurieSharp**.
 4. Download the latest LibreGeist `.dll` from the releases page.
-5. Place the LibreGeist `.dll` where your Aurie/AurieSharp mods are loaded from.
+5. Place the LibreGeist `.dll` where your in mod/managed folder.
 6. Start the game and check the Aurie console/logs to make sure LibreGeist loaded.
 
 ## Useful Guides (not by me)
