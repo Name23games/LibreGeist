@@ -35,7 +35,7 @@ LibreGeist requires **YYToolkit v5**. Older YYToolkit versions may not work corr
 * [Setting up YYTK](https://github.com/AurieFramework/YYToolkit/wiki/Next:-Getting-Started#installing-yytoolkit-on-windows-using-aurie-manager)
 
 # RoadMap
-* LibreGeistAPI documentation
+* LibreGeist documentation
 * GUI
 * Level editor (using Azae Editor by Nico)
 
