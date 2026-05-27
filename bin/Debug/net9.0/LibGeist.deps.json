@@ -1,0 +1,39 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v9.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v9.0": {
+      "LibGeist/1.0.0": {
+        "dependencies": {
+          "AurieSharpInterop": "0.0.0.0"
+        },
+        "runtime": {
+          "LibGeist.dll": {}
+        }
+      },
+      "AurieSharpInterop/0.0.0.0": {
+        "runtime": {
+          "AurieSharpInterop.dll": {
+            "assemblyVersion": "0.0.0.0",
+            "fileVersion": "0.0.0.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "LibGeist/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "AurieSharpInterop/0.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
