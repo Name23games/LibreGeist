@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("LibreGeist")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e9e23893cf2611b499a94b055ce895ce3e27cb4b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5509fcf692ab1e7a3a498edf77910c1c091409c1")]
 [assembly: System.Reflection.AssemblyProductAttribute("LibreGeist")]
 [assembly: System.Reflection.AssemblyTitleAttribute("LibreGeist")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
