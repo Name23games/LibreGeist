@@ -28,6 +28,7 @@ LibreGeist requires **YYToolkit v5**. Older YYToolkit versions may not work corr
 4. Download the latest LibreGeist `.dll` from the releases page.
 5. Place the LibreGeist `.dll` where your in mod/managed folder.
 6. Start the game and check the Aurie console/logs to make sure LibreGeist loaded.
+7. After first load close the game and add any LibreGeist mods into the new Geist folder
 
 ## Useful Guides (not by me)
 * [Installing YYTK v5 + C# bindings](https://youtu.be/KQ6gzVobmOY?si=0RQ68rsf_DusI2-C)
