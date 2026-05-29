@@ -37,8 +37,9 @@ LibreGeist requires **YYToolkit v5**. Older YYToolkit versions may not work corr
 
 # RoadMap
 * LibreGeist documentation
+* Object handler
 * GUI
-* Level editor (using Azae Editor by Nico)
+* Level editor (create my own and have it have compatibility with Azae Editor by Nico)
 
 # Credits
 * YYToolkit
