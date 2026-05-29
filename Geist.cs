@@ -2,7 +2,6 @@
 using LibreGeist;
 using LibreGeist.Constants;
 using LibreGeist.Core;
-using LibreGeist.GUI;
 using System.Diagnostics;
 using System.Reflection;
 using System.Runtime.Loader;
@@ -12,16 +11,25 @@ namespace LibreGeist
 {
     public static class Geist
     {
+        // Core state
         public const string Version = "0.0.1";
-
-        private static readonly Dictionary<int, InstanceBase> Instances = [];
-        private static bool IsInitialized = false;
-        private static readonly List<GeistMod> Mods = [];
-
-        public static string CurrentRoom { get; private set; } = "c0TitleScreen";
         public static AurieManagedModule? Module { get; private set; }
-        public static Menu? MainMenu { get; private set; }
-        public static Menu? PauseMenu { get; private set; }
+
+        // Frame state
+        private static int _frameNumber;
+        private static DateTime _lastFrameTime = DateTime.Now;
+
+        // Game state
+        public static string CurrentRoom { get; private set; } = "c0TitleScreen";
+        public static GameObject? CameraSelf { get; private set; }
+        public static GameObject? FrameSelf { get; private set; }
+
+        // Mod state
+        private static readonly List<GeistMod> Mods = [];
+        private static readonly Dictionary<int, InstanceBase> Instances = [];
+        private static bool IsInitialized;
+        //public static Menu? MainMenu { get; private set; }
+        //public static Menu? PauseMenu { get; private set; }
 
         public static void RegisterInstance(InstanceBase instance)
         {
@@ -45,18 +53,7 @@ namespace LibreGeist
         {
             Framework.Print("[LibreGeist] Initialize started");
 
-            try
-            {
-                Game.Events.AddPostBuiltinNotification(Module, "room_goto", OnRoomChanged);
-
-                Framework.Print("[LibreGeist] room_goto hook added");
-            }
-            catch (Exception ex)
-            {
-                Framework.PrintEx(AurieLogSeverity.Warning, $"[LibreGeist] hook failed: {ex}");
-            }
-
-            CreateMenus();
+            //CreateMenus();
 
             Framework.Print($"GeistLib v{Version} loaded");
             LoadMods();
@@ -106,63 +103,70 @@ namespace LibreGeist
             }
         }
 
+        // Todo add gui
         private static void CreateMenus()
-        {}
+        {
+        }
 
 
         /// <summary>
         /// Builtin function hook to keep track of current room (bound to room_goto)
         /// </summary>
-        private static void OnRoomChanged(BuiltinExecutionContext Context)
+        private static void CheckRoomChanged()
         {
-            CurrentRoom = Game.Engine.CallFunction("room_get_name", Context.Arguments[0]);
-        }
+            string roomName = GML.GetCurrentRoomName();
 
-        /// <summary>
-        /// Handles all game events and passes relevant events through to modded instances
-        /// </summary>
-        private static int _frameNumber = 0;
-        private static DateTime _lastFrameTime = DateTime.Now;
+            if (string.IsNullOrEmpty(roomName))
+                return;
+
+            if (roomName == CurrentRoom)
+                return;
+
+            CurrentRoom = roomName;
+            Framework.Print($"[LibreGeist] Room changed to {roomName}");
+        }
 
         internal static void OnGameEvent(CodeExecutionContext context)
         {
             try
             {
+                if (context.Self.Name == "struct oCamera")
+                    CameraSelf = context.Self;
+
                 if (context.Name.Contains("gml_Object_oCamera_Draw"))
                 {
+                    FrameSelf = context.Self;
+
                     DateTime now = DateTime.Now;
                     double deltaTime = (now - _lastFrameTime).TotalSeconds;
                     _lastFrameTime = now;
 
                     _frameNumber++;
-
                     OnFrame(_frameNumber, deltaTime);
-
                 }
             }
-
             catch (Exception ex)
             {
                 Framework.PrintEx(AurieLogSeverity.Error, $"[LibreGeist] OnGameEvent failed: {ex}");
             }
 
-            // To do add gui
-            //if (!InputController.IsInitialized && context.Self.Name == "struct oCamera")
-            //{
-            //    InputController.Initialize(context.Self);
-            //}
 
-            // Draw Gui elements
-            if (context.Name.Contains("gml_Object_oCamera_Draw_64"))
+            if (!InputController.IsInitialized && context.Self.Name == "struct oCamera")
             {
-                Mouse.Update();
-                // MainMenu?.Draw();
-                // PauseMenu?.Draw();
-                foreach (GeistMod mod in Mods)
-                {
-                    mod.DrawGUI();
-                }
+                InputController.Initialize(context.Self);
             }
+
+            //// Draw Gui elements
+            //if (context.Name.Contains("gml_Object_oCamera_Draw_64"))
+            //{
+            //    Mouse.Update();
+            //    MainMenu?.Draw();
+            //    PauseMenu?.Draw();
+            //    foreach (GeistMod mod in Mods)
+            //    {
+            //        mod.DrawGUI();
+            //    }
+            //}
 
             if (context.Self.IsInstance())
             {
@@ -197,8 +201,25 @@ namespace LibreGeist
                 }
             }
 
-            // MainMenu?.Update((float)deltaTime);
-            // PauseMenu?.Update((float)deltaTime);
+            CheckRoomChanged();
+
+            //if (Keyboard.CheckPressed(0x26)) // Up Arrow
+            //{
+            //    MainMenu?.MoveUp();
+            //}
+
+            //if (Keyboard.CheckPressed(0x28)) // Down Arrow
+            //{
+            //    MainMenu?.MoveDown();
+            //}
+
+            //if (Keyboard.CheckPressed(0x0D)) // Enter
+            //{
+            //    MainMenu?.Activate();
+            //}
+
+            //MainMenu?.Update((float)deltaTime);
+            //PauseMenu?.Update((float)deltaTime);
 
             foreach (GeistMod mod in Mods)
             {

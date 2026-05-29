@@ -13,9 +13,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\torom\\source\\repos\\LibGeist\\LibGeist\\LibGeist.csproj",
-      "projectName": "LibGeist",
-      "projectPath": "C:\\Users\\torom\\source\\repos\\LibGeist\\LibGeist\\LibGeist.csproj",
+      "projectUniqueName": "C:\\Users\\torom\\source\\repos\\LibGeist\\LibGeist\\LibreGeist.csproj",
+      "projectName": "LibreGeist",
+      "projectPath": "C:\\Users\\torom\\source\\repos\\LibGeist\\LibGeist\\LibreGeist.csproj",
       "packagesPath": "C:\\Users\\torom\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\torom\\source\\repos\\LibGeist\\LibGeist\\obj\\",
       "projectStyle": "PackageReference",

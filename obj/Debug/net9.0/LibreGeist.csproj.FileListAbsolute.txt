@@ -1,0 +1,15 @@
+C:\Users\torom\source\repos\LibGeist\LibGeist\bin\Debug\net9.0\LibreGeist.deps.json
+C:\Users\torom\source\repos\LibGeist\LibGeist\bin\Debug\net9.0\LibreGeist.dll
+C:\Users\torom\source\repos\LibGeist\LibGeist\bin\Debug\net9.0\LibreGeist.pdb
+C:\Users\torom\source\repos\LibGeist\LibGeist\bin\Debug\net9.0\AurieSharpInterop.dll
+C:\Users\torom\source\repos\LibGeist\LibGeist\obj\Debug\net9.0\LibreGeist.csproj.AssemblyReference.cache
+C:\Users\torom\source\repos\LibGeist\LibGeist\obj\Debug\net9.0\LibreGeist.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\torom\source\repos\LibGeist\LibGeist\obj\Debug\net9.0\LibreGeist.AssemblyInfoInputs.cache
+C:\Users\torom\source\repos\LibGeist\LibGeist\obj\Debug\net9.0\LibreGeist.AssemblyInfo.cs
+C:\Users\torom\source\repos\LibGeist\LibGeist\obj\Debug\net9.0\LibreGeist.csproj.CoreCompileInputs.cache
+C:\Users\torom\source\repos\LibGeist\LibGeist\obj\Debug\net9.0\LibreGeist.sourcelink.json
+C:\Users\torom\source\repos\LibGeist\LibGeist\obj\Debug\net9.0\LibreGeist.csproj.Up2Date
+C:\Users\torom\source\repos\LibGeist\LibGeist\obj\Debug\net9.0\LibreGeist.dll
+C:\Users\torom\source\repos\LibGeist\LibGeist\obj\Debug\net9.0\refint\LibreGeist.dll
+C:\Users\torom\source\repos\LibGeist\LibGeist\obj\Debug\net9.0\LibreGeist.pdb
+C:\Users\torom\source\repos\LibGeist\LibGeist\obj\Debug\net9.0\ref\LibreGeist.dll

@@ -5,9 +5,10 @@ namespace LibreGeist.Core
 {
     public class GML
     {
-        /// <summary>
-        /// Calls any GameMaker/GML function by name.
-        /// </summary>
+        // -------------------------
+        // Core call wrapper
+        // -------------------------
+
         public static GameVariable Call(string functionName, params GameVariable[] args)
         {
             try
@@ -18,22 +19,138 @@ namespace LibreGeist.Core
             {
                 Framework.PrintEx(
                     AurieLogSeverity.Error,
-                    $"Error while calling \"{functionName}\": {ex}"
+                    $"[LibreGeist] GML call failed: {functionName}: {ex}"
                 );
 
                 throw;
             }
         }
 
-        public static GameVariable? GetInstanceVariable(GameVariable instance, string name)
+        // -------------------------
+        // Assets
+        // -------------------------
+
+        public static GameVariable GetAsset(string assetName)
+        {
+            return Call("asset_get_index", assetName);
+        }
+
+        public static bool AssetExists(string assetName)
+        {
+            return GetAsset(assetName).ToString() != "-1";
+        }
+
+        // -------------------------
+        // Rooms
+        // -------------------------
+
+        public static string GetCurrentRoomName()
         {
             try
             {
-                return Game.Engine.CallFunction("variable_instance_get", instance, name);
+                if (Geist.FrameSelf == null)
+                    return "";
+
+                GameVariable room = Game.Engine.GetBuiltinVariable(
+                    "room",
+                    Geist.FrameSelf,
+                    -1
+                );
+
+                return Call("room_get_name", room).ToString();
             }
             catch (Exception ex)
             {
-                Framework.PrintEx(AurieLogSeverity.Error, $"Error while fetching \"{name}\": {ex}");
+                Framework.PrintEx(
+                    AurieLogSeverity.Error,
+                    $"[LibreGeist] Failed to get current room: {ex}"
+                );
+
+                return "";
+            }
+        }
+
+        /// <summary>
+        /// Adds a new instance to a room based on an object template.
+        /// </summary>
+        /// <param name="roomName">Use constants from <see cref="Constants.Rooms"/></param>
+        /// <param name="objectName">Name of the object template</param>
+        /// <param name="x">X Coordinate</param>
+        /// <param name="y">Y Coordinate</param>
+        /// <returns>REF Index of the new instance</returns>
+        public static GameVariable AddObjectToRoom(
+            string roomName,
+            string objectName,
+            int x,
+            int y
+        )
+        {
+            GameVariable room = GetAsset(roomName);
+            GameVariable obj = GetAsset(objectName);
+
+            return Call("room_instance_add", room, x, y, obj);
+        }
+
+        // -------------------------
+        // Instances
+        // -------------------------
+
+        public static bool InstanceExists(GameVariable instance)
+        {
+            return Call("instance_exists", instance);
+        }
+
+        public static GameVariable? FindInstance(string objectName, int index = 0)
+        {
+            try
+            {
+                GameVariable obj = GetAsset(objectName);
+
+                if (obj.ToString() == "-1")
+                {
+                    Framework.Print($"[LibreGeist] Object not found: {objectName}");
+                    return null;
+                }
+
+                GameVariable instance = Call(
+                    "instance_find",
+                    obj,
+                    new GameVariable(index)
+                );
+
+                return InstanceExists(instance) ? instance : null;
+            }
+            catch (Exception ex)
+            {
+                Framework.PrintEx(
+                    AurieLogSeverity.Error,
+                    $"[LibreGeist] Failed to find instance: {objectName}: {ex}"
+                );
+
+                return null;
+            }
+        }
+
+        // -------------------------
+        // Instance variables
+        // -------------------------
+
+        public static GameVariable? GetInstanceVariable(
+            GameVariable instance,
+            string name
+        )
+        {
+            try
+            {
+                return Call("variable_instance_get", instance, name);
+            }
+            catch (Exception ex)
+            {
+                Framework.PrintEx(
+                    AurieLogSeverity.Error,
+                    $"[LibreGeist] Failed to get instance variable '{name}': {ex}"
+                );
+
                 return null;
             }
         }
@@ -46,11 +163,14 @@ namespace LibreGeist.Core
         {
             try
             {
-                Game.Engine.CallFunction("variable_instance_set", instance, name, value);
+                Call("variable_instance_set", instance, name, value);
             }
             catch (Exception ex)
             {
-                Framework.PrintEx(AurieLogSeverity.Error, $"Error while fetching \"{name}\": {ex}");
+                Framework.PrintEx(
+                    AurieLogSeverity.Error,
+                    $"[LibreGeist] Failed to set instance variable '{name}': {ex}"
+                );
             }
         }
 
@@ -58,77 +178,18 @@ namespace LibreGeist.Core
         {
             try
             {
-                return Game.Engine.CallFunction("variable_instance_exists", instance, name);
-            }
-            catch (Exception ex)
-            {
-                Framework.PrintEx(AurieLogSeverity.Error, $"Error while fetching \"{name}\": {ex}");
-            }
-            return false;
-        }
-
-        /// <summary>
-        /// Adds a new instance to a room based on an object template.
-        /// </summary>
-        /// <param name="roomName">Use constants from <see cref="Constants.Rooms"/></param>
-        /// <param name="objectName">Name of the object template</param>
-        /// <param name="x">X Coordinate</param>
-        /// <param name="y">Y Coordinate</param>
-        /// <returns>REF Index of the new instance</returns>
-        public static GameVariable AddObjectToRoom(string roomName, string objectName, int x, int y)
-        {
-            var objectRef = Game.Engine.CallFunction("asset_get_index", objectName);
-            var roomRef = Game.Engine.CallFunction("asset_get_index", roomName);
-            var instance = Game.Engine.CallFunction("room_instance_add", roomRef, x, y, objectRef);
-
-            return instance;
-        }
-
-        public static GameVariable? GetAsset(string assetName)
-        {
-            var assetIndex = Game.Engine.CallFunction("asset_get_index", assetName);
-            return assetIndex;
-        }
-
-        internal static bool InstanceExists(GameVariable index)
-        {
-            return Game.Engine.CallFunction("instance_exists", index);
-        }
-
-        public static GameInstance? FindInstance(string objectName, int index = 0)
-        {
-            try
-            {
-                GameVariable objectIndex = GetAsset(objectName)!;
-
-                if (objectIndex.GetObjectId() == -1)
-                {
-                    Framework.Print($"[LibreGeist] Object not found: {objectName}");
-                    return null;
-                }
-
-                GameVariable instance = Game.Engine.CallFunction(
-                    "instance_find",
-                    objectIndex,
-                    new GameVariable(index)
-                );
-
-                if (instance.GetInstanceId() == -1)
-                {
-                    return null;
-                }
-
-                return (GameInstance)instance;
+                return Call("variable_instance_exists", instance, name);
             }
             catch (Exception ex)
             {
                 Framework.PrintEx(
                     AurieLogSeverity.Error,
-                    $"[LibreGeist] FindInstance failed: {ex}"
+                    $"[LibreGeist] Failed to check instance variable '{name}': {ex}"
                 );
 
-                return null;
+                return false;
             }
         }
     }
 }
+

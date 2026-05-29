@@ -1,14 +1,18 @@
 C:\Users\torom\source\repos\LibGeist\LibGeist\bin\Debug\net9.0\LibGeist.deps.json
 C:\Users\torom\source\repos\LibGeist\LibGeist\bin\Debug\net9.0\LibGeist.dll
 C:\Users\torom\source\repos\LibGeist\LibGeist\bin\Debug\net9.0\LibGeist.pdb
-C:\Users\torom\source\repos\LibGeist\LibGeist\bin\Debug\net9.0\AurieSharpInterop.dll
 C:\Users\torom\source\repos\LibGeist\LibGeist\obj\Debug\net9.0\LibGeist.csproj.AssemblyReference.cache
 C:\Users\torom\source\repos\LibGeist\LibGeist\obj\Debug\net9.0\LibGeist.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\torom\source\repos\LibGeist\LibGeist\obj\Debug\net9.0\LibGeist.AssemblyInfoInputs.cache
 C:\Users\torom\source\repos\LibGeist\LibGeist\obj\Debug\net9.0\LibGeist.AssemblyInfo.cs
 C:\Users\torom\source\repos\LibGeist\LibGeist\obj\Debug\net9.0\LibGeist.csproj.CoreCompileInputs.cache
+C:\Users\torom\source\repos\LibGeist\LibGeist\obj\Debug\net9.0\LibGeist.sourcelink.json
 C:\Users\torom\source\repos\LibGeist\LibGeist\obj\Debug\net9.0\LibGeist.csproj.Up2Date
 C:\Users\torom\source\repos\LibGeist\LibGeist\obj\Debug\net9.0\LibGeist.dll
 C:\Users\torom\source\repos\LibGeist\LibGeist\obj\Debug\net9.0\refint\LibGeist.dll
 C:\Users\torom\source\repos\LibGeist\LibGeist\obj\Debug\net9.0\LibGeist.pdb
 C:\Users\torom\source\repos\LibGeist\LibGeist\obj\Debug\net9.0\ref\LibGeist.dll
+C:\Program Files (x86)\Steam\steamapps\common\TetherGeist\TG SpeedrunMod\mods\managed\Debug\net9.0\LibGeist.deps.json
+C:\Program Files (x86)\Steam\steamapps\common\TetherGeist\TG SpeedrunMod\mods\managed\Debug\net9.0\LibGeist.dll
+C:\Program Files (x86)\Steam\steamapps\common\TetherGeist\TG SpeedrunMod\mods\managed\Debug\net9.0\LibGeist.pdb
+C:\Users\torom\source\repos\LibGeist\LibGeist\bin\Debug\net9.0\AurieSharpInterop.dll

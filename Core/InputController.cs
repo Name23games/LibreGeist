@@ -1,4 +1,5 @@
-﻿using YYTKInterop;
+﻿using System.Runtime.InteropServices;
+using YYTKInterop;
 
 namespace LibreGeist.Core
 {
@@ -81,4 +82,36 @@ namespace LibreGeist.Core
             }
         }
     }
+
+    public static class Keyboard
+    {
+        [DllImport("user32.dll")]
+        private static extern short GetAsyncKeyState(int vKey);
+
+        public static bool Check(int key)
+        {
+            return (GetAsyncKeyState(key) & 0x8000) != 0;
+        }
+
+        public static bool CheckPressed(int key)
+        {
+            bool current = Check(key);
+
+            if (current && !lastKeys[key])
+            {
+                lastKeys[key] = true;
+                return true;
+            }
+
+            if (!current)
+            {
+                lastKeys[key] = false;
+            }
+
+            return false;
+        }
+
+        private static readonly bool[] lastKeys = new bool[256];
+    }
+
 }

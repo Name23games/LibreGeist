@@ -69,6 +69,8 @@ namespace LibreGeist
             return -1;
         }
 
+
+
         public static int GetObjectId(this GameVariable variable)
         {
             if (variable.TryGetRef(out string refType, out int id) && refType == "object")
