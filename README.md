@@ -1,4 +1,5 @@
-<img width="300" height="300" alt="LibreGeistLogo" src="https://github.com/user-attachments/assets/64c1f330-920c-4402-a3f6-eff8aa79d0b0" />
+<img width="200" height="200" alt="maev2" src="https://github.com/user-attachments/assets/34c9e11c-5769-422f-81b6-5c47269c3f0c" />
+
 
 # LibreGeist
 LibreGeist Modding Framework for [TetherGeist](https://store.steampowered.com/app/2474430/TetherGeist/) based on [BubbleLib](https://github.com/TP-repo/BubbleLib) and built on YYTK and AurieSharp
